@@ -1,7 +1,9 @@
 package demo.keepers;
 
 import com.vdurmont.emoji.EmojiParser;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import org.apache.commons.lang.math.IntRange;
 
@@ -21,6 +23,12 @@ public class RemoveEmojis {
         System.out.println(EmojiParser.removeAllEmojis(str)); // average speed 150000 nanoseconds
         System.out.println(removeEmojis(str)); // average speed below 10000 nanoseconds
         System.out.println(removeEmojis2(str)); // average speed 15000 nanoseconds
+
+        System.out.println(removeAllEmojis(List.of(str)));
+    }
+
+    public static List<String> removeAllEmojis(List<String> data) {
+        return data.stream().map(RemoveEmojis::removeEmojis).collect(Collectors.toList());
     }
 
     public static String removeEmojis(String text) {
